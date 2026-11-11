@@ -4,10 +4,6 @@ const extractButton = document.querySelector("#extract");
 const feedback = document.querySelector("#feedback");
 let activeTab;
 
-function isWikipediaArticle(url) {
-  try { const parsed = new URL(url); return parsed.protocol === "https:" && /(^|\.)wikipedia\.org$/.test(parsed.hostname) && parsed.pathname.startsWith("/wiki/"); }
-  catch { return false; }
-}
 function showFeedback(message, isError = false) { feedback.textContent = message; feedback.classList.toggle("error", isError); }
 async function copyResult(result, includeRichContent) {
   if (includeRichContent && window.ClipboardItem && navigator.clipboard.write) {
@@ -18,7 +14,7 @@ async function copyResult(result, includeRichContent) {
 async function initialize() {
   const [tab] = await chrome.tabs.query({active:true,currentWindow:true});
   activeTab = tab;
-  if (!tab || !isWikipediaArticle(tab.url)) {
+  if (!tab || !WikipediaUrl.isWikipediaArticle(tab.url)) {
     pageStatus.textContent = "Abra um artigo da Wikipédia para usar o extrator.";
     pageStatus.classList.add("invalid"); return;
   }

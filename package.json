@@ -1,1 +1,1 @@
-{"name":"wikipedia-text-extractor","version":"1.0.0","private":true,"scripts":{"test":"node --test","check":"node scripts/check-extension.mjs && node --test"},"devDependencies":{"linkedom":"^0.18.12"}}
+{"name":"wikipedia-text-extractor","version":"1.0.1","private":true,"scripts":{"test":"node --test","check":"node scripts/check-extension.mjs && node --test"},"devDependencies":{"linkedom":"^0.18.12"}}
