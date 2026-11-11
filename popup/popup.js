@@ -11,6 +11,24 @@ async function copyResult(result, includeRichContent) {
     await navigator.clipboard.write([item]);
   } else await navigator.clipboard.writeText(result.plainText);
 }
+
+async function requestExtraction(tabId, extractionOptions) {
+  const message = {type:"EXTRACT_WIKIPEDIA_ARTICLE", options:extractionOptions};
+  try {
+    return await chrome.tabs.sendMessage(tabId, message);
+  } catch (firstError) {
+    await chrome.scripting.executeScript({
+      target: {tabId},
+      files: ["src/extractor.js", "src/content.js"]
+    });
+    try {
+      return await chrome.tabs.sendMessage(tabId, message);
+    } catch {
+      throw new Error("Não foi possível conectar ao artigo. Atualize a página e tente novamente.", {cause:firstError});
+    }
+  }
+}
+
 async function initialize() {
   const [tab] = await chrome.tabs.query({active:true,currentWindow:true});
   activeTab = tab;
@@ -27,7 +45,7 @@ extractButton.addEventListener("click", async () => {
   const includeReferences = document.querySelector("#include-references").checked;
   extractButton.disabled = true; extractButton.querySelector("span").textContent = "Extraindo…"; showFeedback("");
   try {
-    const response = await chrome.tabs.sendMessage(activeTab.id, {type:"EXTRACT_WIKIPEDIA_ARTICLE",options:{includeImages,includeReferences}});
+    const response = await requestExtraction(activeTab.id, {includeImages,includeReferences});
     if (!response?.ok) throw new Error(response?.error || "A página não respondeu ao extrator.");
     await copyResult(response.result, includeImages);
     showFeedback(`${response.result.characterCount.toLocaleString("pt-BR")} caracteres copiados!`);

@@ -5,4 +5,5 @@ for (const file of requiredFiles) if (!fs.existsSync(file)) throw new Error(`Arq
 if (manifest.manifest_version !== 3) throw new Error("A extensão deve usar Manifest V3.");
 if (manifest.content_scripts.some((entry) => entry.matches.some((match) => !match.includes("wikipedia.org")))) throw new Error("Content script autorizado fora da Wikipédia.");
 if (!manifest.host_permissions?.includes("https://*.wikipedia.org/*")) throw new Error("Permissão para subdomínios da Wikipédia ausente.");
+if (!manifest.permissions?.includes("scripting")) throw new Error("Permissão para recuperar abas sem content script ausente.");
 console.log("Manifesto e arquivos da extensão validados.");
