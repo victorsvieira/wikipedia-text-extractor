@@ -9,7 +9,7 @@ Chega de apagar manualmente links, estilos, botões de edição, números de cit
 - Extrai o texto principal de artigos da Wikipédia.
 - Remove CSS, links e elementos de navegação.
 - Remove marcadores como `[1]`, notas e a seção de referências por padrão.
-- Preserva títulos, parágrafos, listas e o conteúdo textual de tabelas.
+- Preserva títulos, subtítulos, parágrafos, listas e tabelas em editores compatíveis.
 - Permite incluir imagens opcionalmente.
 - Permite incluir referências opcionalmente.
 - Copia o resultado diretamente para a área de transferência.
@@ -27,12 +27,12 @@ Ao abrir a extensão em um artigo da Wikipédia, você pode escolher entre três
 
 | Opções | Resultado |
 | --- | --- |
-| Nenhuma opção marcada | Texto simples, sem imagens, links ou referências |
+| Nenhuma opção marcada | Conteúdo formatado, sem imagens, links ou referências |
 | Imagens | Inclui as imagens ao colar em editores compatíveis com conteúdo rico |
 | Referências | Mantém os marcadores, notas e a lista de fontes |
 | Imagens + referências | Copia o artigo com ambos os conteúdos opcionais |
 
-Mesmo quando imagens são selecionadas, a área de transferência também recebe uma versão em texto simples. Nessa versão, imagens são representadas por descrições como `[Imagem: Susana Vieira]`.
+A área de transferência sempre recebe duas versões: HTML semântico, que mantém títulos, subtítulos, parágrafos, listas e tabelas; e texto simples, usado automaticamente por campos que não aceitam formatação. Quando imagens são selecionadas, a versão simples as representa por descrições como `[Imagem: Susana Vieira]`.
 
 ## Instalação
 

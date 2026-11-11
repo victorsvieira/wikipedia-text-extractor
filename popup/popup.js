@@ -5,12 +5,6 @@ const feedback = document.querySelector("#feedback");
 let activeTab;
 
 function showFeedback(message, isError = false) { feedback.textContent = message; feedback.classList.toggle("error", isError); }
-async function copyResult(result, includeRichContent) {
-  if (includeRichContent && window.ClipboardItem && navigator.clipboard.write) {
-    const item = new ClipboardItem({"text/plain": new Blob([result.plainText], {type:"text/plain"}), "text/html": new Blob([result.html], {type:"text/html"})});
-    await navigator.clipboard.write([item]);
-  } else await navigator.clipboard.writeText(result.plainText);
-}
 
 async function requestExtraction(tabId, extractionOptions) {
   const message = {type:"EXTRACT_WIKIPEDIA_ARTICLE", options:extractionOptions};
@@ -47,7 +41,7 @@ extractButton.addEventListener("click", async () => {
   try {
     const response = await requestExtraction(activeTab.id, {includeImages,includeReferences});
     if (!response?.ok) throw new Error(response?.error || "A página não respondeu ao extrator.");
-    await copyResult(response.result, includeImages);
+    await WikipediaClipboard.copyExtractedArticle(response.result);
     showFeedback(`${response.result.characterCount.toLocaleString("pt-BR")} caracteres copiados!`);
     extractButton.querySelector("span").textContent = "Copiado";
   } catch (error) {

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Wikipedia Text Extractor",
   "description": "Copie artigos da Wikipédia sem links, estilos e referências indesejadas.",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "permissions": ["activeTab", "clipboardWrite", "scripting"],
   "host_permissions": ["https://*.wikipedia.org/*"],
   "action": {"default_title": "Extrair texto da Wikipédia", "default_popup": "popup/popup.html"},
