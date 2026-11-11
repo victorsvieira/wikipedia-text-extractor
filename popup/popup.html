@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wikipedia Text Extractor</title><link rel="stylesheet" href="popup.css"></head>
+<body><main>
+  <header><div class="mark" aria-hidden="true">W</div><div><p class="eyebrow">WIKIPEDIA</p><h1>Extrair artigo</h1></div></header>
+  <p id="page-status" class="page-status" role="status">Verificando a página…</p>
+  <fieldset id="options" disabled><legend>O que deseja incluir?</legend>
+    <label class="option"><span><strong>Imagens</strong><small>Mantém as imagens ao colar em editores compatíveis.</small></span><input id="include-images" type="checkbox"><i aria-hidden="true"></i></label>
+    <label class="option"><span><strong>Referências</strong><small>Inclui marcações, notas e a lista de fontes.</small></span><input id="include-references" type="checkbox"><i aria-hidden="true"></i></label>
+  </fieldset>
+  <button id="extract" type="button" disabled><span>Extrair e copiar</span><span aria-hidden="true">→</span></button>
+  <p id="feedback" class="feedback" aria-live="polite"></p>
+</main><script src="popup.js"></script></body></html>
